@@ -4,7 +4,7 @@ import { HttpError } from './http';
 
 export async function screen(job: Job, resume: string) {
   if (!process.env.ANTHROPIC_API_KEY) throw new HttpError(503, 'Falta la clau d’Anthropic al servidor.');
-  const model = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-20250514';
+  const model = process.env.ANTHROPIC_MODEL || 'claude-haiku-4-5-20251001';
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 1, timeout: 35_000 });
   let correction = '';
   for (let attempt = 0; attempt < 2; attempt++) {
@@ -30,6 +30,7 @@ export async function screen(job: Job, resume: string) {
         if (error.status === 401 || error.status === 403) throw new HttpError(503, 'La clau d’Anthropic no té accés. Revisa la configuració.');
         if (error.status === 404) throw new HttpError(503, 'El model configurat no està disponible. Revisa ANTHROPIC_MODEL.');
         if (error.status === 429) throw new HttpError(429, 'Anthropic ha limitat les peticions. Espera uns segons i reintenta.');
+        if (error.status === 400 && /credit|balance|billing/i.test(error.message)) throw new HttpError(503, 'El compte d’Anthropic necessita saldo o revisar la facturació.');
         throw new HttpError(502, 'Anthropic no ha respost. Pots reintentar l’anàlisi.');
       }
       correction = 'La resposta anterior no ha superat la validació. Inclou exactament els IDs de la rúbrica i cites literals existents. Respecta les longituds i l’escala de 0 a 5.';
