@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { authenticated, failure, HttpError } from '@/lib/http';
 import { screen } from '@/lib/screen';
 import type { Job } from '@/lib/domain';
+import { withAiBudget } from '@/lib/ai-budget';
 export const runtime = 'nodejs';
 export const maxDuration = 120;
 
@@ -21,7 +22,7 @@ export async function POST(request: Request, context: { params: Promise<{ id: st
     if (lockError) throw new HttpError(500, 'No s’ha pogut iniciar l’anàlisi.');
     if (!lock) throw new HttpError(409, 'L’anàlisi ja està en curs. Espera o reintenta d’aquí a 3 minuts.');
     try {
-      const result = await screen(job as Job, candidate.resume_text);
+      const result = await withAiBudget(sb, () => screen(job as Job, candidate.resume_text));
       const { data, error } = await sb.from('candidates').update({ ...result, status: 'ready', error: null, analyzed_at: new Date().toISOString() }).eq('id', id).eq('user_id', user.id).select().single();
       if (error) throw new HttpError(500, 'No s’ha pogut desar l’anàlisi.');
       return NextResponse.json(data);

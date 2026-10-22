@@ -5,6 +5,7 @@ import { failure, HttpError } from '@/lib/http';
 import { generateInterview, evaluateInterview } from '@/lib/interview-ai';
 import { validateAnswers, type Interview } from '@/lib/bonus-domain';
 import type { Job } from '@/lib/domain';
+import { withAiBudget } from '@/lib/ai-budget';
 export const maxDuration = 120;
 type Context = { params: Promise<{ id: string }> };
 
@@ -45,9 +46,9 @@ export async function POST(request: Request, context: Context) {
     try {
       const { data: job, error: jobError } = await sb.from('jobs').select('*').eq('id', candidate.job_id).eq('user_id', user.id).single();
       if (jobError || !job) throw new HttpError(404, 'No s’ha trobat la vacant.');
-      const result = input.action === 'generate'
+      const result = await withAiBudget(sb, async () => input.action === 'generate'
         ? await generateInterview(candidate, job as Job)
-        : await evaluateInterview(session!.plan!, answers, job as Job);
+        : await evaluateInterview(session!.plan!, answers, job as Job));
       const resultPatch = input.action === 'generate' ? { plan: result.value, status: 'draft' } : { evaluation: result.value, status: 'ready' };
       const saved = await sb.from('candidate_interviews').update({ ...resultPatch, model: result.model, error: null, updated_at: new Date().toISOString() }).eq('candidate_id', candidate.id).eq('user_id', user.id).eq('updated_at', now).select().maybeSingle();
       bonusDatabaseError(saved.error);
