@@ -1,0 +1,4 @@
+project_id = "prova_tecnica"
+
+[db]
+major_version = 17
