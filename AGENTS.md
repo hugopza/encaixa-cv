@@ -13,4 +13,4 @@ Llegeix `docs/README.md` i `docs/ESTAT.md` abans de modificar res.
 - Documentar comprovacions executades i bloquejos a `docs/ESTAT.md`.
 - No desplegar sobre un projecte existent sense verificar que és el destí correcte.
 
-La persona usuària ha autoritzat implementar, aplicar l'esquema de Supabase al projecte indicat per `.env.local` i crear commits locals. No hi ha encara destí GitHub/Vercel verificat.
+La persona usuària ha autoritzat implementar, aplicar l'esquema al projecte Supabase `prova_tecnica` (`fgfwwjdneeiiadoictpv`), crear commits petits i fer push a `https://github.com/hugopza/prova-tenica.git`. Vercel encara no té destí verificat. Mantenir localhost tancat fins que l'usuari demani tornar-lo a aixecar. Corregir autònomament errors resolubles; comunicar bloquejos de permisos o credencials.

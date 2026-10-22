@@ -1,0 +1,9 @@
+PERFIL SINTÈTIC PER A DEMOSTRACIONS. Persona i trajectòria inventades.
+Nom: Nil Costa Demo
+Perfil: Desenvolupament web júnior.
+
+Experiència 2024-2026: He mantingut webs de comerç electrònic amb HTML, CSS i JavaScript. He creat components de React en un projecte formatiu de tres mesos i he consumit una API de catàleg. Encara no he utilitzat TypeScript en un entorn professional.
+
+Projecte: Catàleg de productes amb cerca i filtres, publicat com a projecte personal. He adaptat els dissenys a mòbil. He fet comprovacions manuals en Chrome i Firefox; no he escrit proves automatitzades. No he fet una auditoria d'accessibilitat.
+
+Formació: Cicle de desenvolupament d'aplicacions web. M'interessa créixer en desenvolupament frontend de producte.

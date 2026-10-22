@@ -4,6 +4,7 @@
 
 - URL real oberta i compte confirmat.
 - Tres CVs sintètics: encaix alt, parcial i perfil d'una altra especialitat.
+- Fitxers preparats a `docs/demo/`: vacant i tres CVs TXT. Les anàlisis s'han de generar amb l'API real; no contenen puntuacions prefixades.
 - Una vacant amb criteris clars i anàlisis desades; fer també una crida en viu.
 - Una còpia local dels CVs. No utilitzar dades personals reals.
 

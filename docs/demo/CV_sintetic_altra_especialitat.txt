@@ -1,0 +1,11 @@
+PERFIL SINTÈTIC PER A DEMOSTRACIONS. Persona i trajectòria inventades.
+Nom: Mar Vidal Demo
+Perfil: Anàlisi de dades i processos.
+
+Experiència 2021-2026: He desenvolupat processos de neteja i transformació de dades amb Python i SQL. He creat quadres de comandament de vendes amb Power BI per a equips comercials. He validat pipelines amb proves de qualitat de dades i he documentat les definicions de mètriques.
+
+Projecte: Automatització de l'informe setmanal de vendes, reduint la preparació manual de sis hores a trenta minuts. He col·laborat amb operacions i finances per verificar els resultats.
+
+No tinc experiència professional en desenvolupament d'interfícies amb React o TypeScript. No he treballat amb Playwright ni amb accessibilitat web.
+
+Formació: Anàlisi de dades i estadística aplicada.

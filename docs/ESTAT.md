@@ -1,32 +1,55 @@
 # Estat del projecte
 
-Actualitzat: 22 d'octubre de 2026. Aquest fitxer diferencia implementació i verificació.
+Actualitzat: 22 d'octubre de 2026. Es diferencia codi implementat de flux verificat.
 
-## Escrit, pendent de validar
+## Implementat
 
-- Configuració Next.js i autenticació Supabase amb sessió de servidor.
-- Esquema SQL amb RLS i relació composta propietari/vacant.
-- API de vacants, càrrega PDF/TXT, detecció de duplicats i decisions humanes.
-- Anàlisi Anthropic amb tool call, Zod, cites i total ponderat.
-- Interfície de login, dashboard, taula, detall, comparador i formularis.
+- Login i registre amb Supabase; sessió comprovada a cada API.
+- Vacants amb rúbrica fixa; candidats PDF/TXT o text enganxat.
+- Esquema amb RLS i relació composta propietari/vacant.
+- Duplicats per hash; persistència abans d'analitzar; estats i reintents.
+- Anthropic: tool call, Zod, cites contrastades i total ponderat al servidor.
+- Model per defecte: `claude-haiku-4-5-20251001`.
+- Dashboard, classificació, cerca, filtre, detall i comparació de fins a tres candidats.
+- Decisions de preselecció/descart exclusivament manuals.
+- Estils responsive i diàlegs natius amb focus i tancament per Escape.
 
-## Bloquejos detectats
+## Verificacions executades
 
-- `npm install` no ha completat: la xarxa del procés ha retornat EACCES al registre npm.
-- La comanda `supabase` no està disponible al PATH.
-- L'usuari ha emplenat `.env.local`; no s'han mostrat els valors. Connexió encara no verificada.
+- `npm run typecheck`: aprovat després d'excloure `tmp/` i corregir l'alliberament del PDF amb `pdf.loadingTask.destroy()`.
+- `npm run lint`: aprovat després de substituir dos enllaços interns per `next/link`.
+- `npm test`: 8 proves aprovades de puntuació ponderada, cites inventades/absents, normalització de text, IDs, escala i pesos.
+- `npm run build`: aprovat amb Webpack i dos workers, inclosa la comprovació TypeScript del build.
+- Servidor local: va arrencar i `/login` va respondre HTTP 200.
+- Localhost tancat a petició de l'usuari; port 3000 comprovat sense listeners. No tornar-lo a aixecar sense petició.
+- Extracció local dels quatre CVs aportats: llegibles. Tres versions individuals acceptades; el PDF trilingüe supera 2 MB. No s'han copiat al repositori ni enviat a Anthropic.
+- Migració aplicada per l'usuari. Comprovació REST posterior de `jobs` i `candidates`: totes dues existeixen i retornen `42501` (accés anònim denegat), en lloc de PGRST205. Això comprova existència i restricció anònima, no l'aïllament entre dos usuaris autenticats.
+- Crida mínima a Anthropic: HTTP 401 d'autenticació. No hi ha encara anàlisi real completada.
 
-## Pendent
+## Git i infraestructura
 
-1. Acabar CSS i proves de domini.
-2. Resoldre instal·lació; lint, tipus, tests i build.
-3. Preparar i aplicar migració amb CLI o SQL Editor, sense duplicar-la.
-4. Configurar Haiku i verificar una crida real.
-5. Provar flux complet i aïllament entre dos usuaris amb CVs sintètics.
-6. Revisió visual desktop/mòbil i errors.
-7. Commits petits en català; publicar quan es conegui el destí.
-8. URL desplegada i walkthrough final.
+- Repositori verificat: https://github.com/hugopza/prova-tenica.git.
+- Cinc commits inicials creats per l'usuari i sincronitzats amb `origin/master`.
+- Correccions locals posteriors pendents de commit/push.
+- L'agent no ha pogut escriure a `.git/index.lock` en els intents anteriors. L'autorització de l'usuari no canvia els permisos efectius del procés.
+- Projecte Supabase vinculat: `prova_tecnica`, ref `fgfwwjdneeiiadoictpv`.
+- Migració preparada: `supabase/migrations/20261022153000_create_recruiting_portal.sql`.
+- CLI localitzada al cache de npx. La telemetria es desactiva amb `SUPABASE_TELEMETRY_DISABLED=1`; el token de login de l'usuari no és accessible al procés de l'agent.
+- L'usuari ha confirmat `npx supabase db push` completat; existència de les dues taules comprovada després.
+- Cap projecte Vercel de destí ni URL desplegada verificats.
 
-## Resultats verificats
+## Bloquejos que requereixen intervenció de l'usuari
 
-Revisió estàtica dels cinc repositoris de referència. Encara no hi ha build, tests ni flux end-to-end aprovats. No hi ha URL de producció ni repositori remot confirmats.
+1. Revisar/substituir `ANTHROPIC_API_KEY` a `.env.local`; l'API rebutja l'autenticació. No enviar la clau al xat.
+2. Permetre escriptura de l'agent a `.git` o crear els commits des de la terminal de l'usuari.
+
+## Pendent de verificar
+
+- Flux autenticat complet amb persistència, anàlisi real i comparació.
+- Aïllament RLS entre dos usuaris contra el projecte remot.
+- Inspecció visual desktop/mòbil en navegador; només hi ha revisió de codi fins ara.
+- Desplegament Vercel, comprovacions a la URL final i walkthrough.
+
+## Incidència de memòria
+
+Turbopack va registrar errors out-of-memory en aquest equip. S'ha passat `dev` i `build` a Webpack i reduït els workers a dos. La compilació de producció posterior ha acabat correctament. Evitar executar compiladors simultanis.

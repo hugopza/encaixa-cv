@@ -1,0 +1,9 @@
+PERFIL SINTÈTIC PER A DEMOSTRACIONS. Persona i trajectòria inventades.
+Nom: Ari Soler Demo
+Perfil: Desenvolupament frontend de productes web.
+
+Experiència 2022-2026: He desenvolupat aplicacions amb React i TypeScript durant quatre anys. He creat formularis amb validació i integració d'APIs REST. He implementat navegació per teclat, etiquetes accessibles i gestió del focus en diàlegs. He escrit proves unitàries amb Vitest i proves end-to-end amb Playwright. He col·laborat amb disseny i backend en lliuraments quinzenals.
+
+Projecte: Portal de comandes publicat per a un equip de 30 persones. Vaig reduir el temps de càrrega de la pantalla principal de 4,2 a 1,8 segons mitjançant paginació i optimització de consultes. Vaig documentar el desplegament i les decisions tècniques.
+
+Formació: Desenvolupament d'aplicacions web. Idiomes: català, castellà i anglès professional.
