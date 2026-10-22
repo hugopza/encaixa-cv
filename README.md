@@ -2,6 +2,8 @@
 
 Portal de selecció amb IA: vacants, CVs PDF/TXT, avaluació amb evidències i comparació de candidats.
 
+He decidit construir un portal centrat en el flux de selecció: crear vacants, analitzar CVs amb criteris explícits i comparar candidatures, mantenint la decisió final en mans del reclutador. He prioritzat aquest flux i hi he afegit entrevistes assistides i consulta de perfils GitHub confirmats; he deixat fora l’OCR, el calendari i la cerca general de perfils. Amb més temps, validaria la qualitat de les valoracions amb més casos reals, ampliaria les fonts professionals i completaria les proves de punta a punta en producció.
+
 ## Arrencada
 
 ```sh
