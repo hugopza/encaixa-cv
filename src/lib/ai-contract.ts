@@ -1,6 +1,7 @@
 import type Anthropic from '@anthropic-ai/sdk';
 import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
 import { z } from 'zod';
+import { AnalysisEvidenceError } from './domain';
 
 export function strictTool<T>(schema: z.ZodType<T>): Anthropic.Tool {
   return {
@@ -12,6 +13,7 @@ export function strictTool<T>(schema: z.ZodType<T>): Anthropic.Tool {
 }
 
 export function validationFeedback(error: unknown) {
+  if (error instanceof AnalysisEvidenceError) return `${error.message} Corregeix el camp indicat copiant un fragment continu de resume exactament. No concatenis frases separades, no tradueixis ni afegeixis punts suspensius. Conserva la resta dels camps vàlids i tots els IDs demanats.`;
   if (error instanceof z.ZodError) {
     return `Format incorrecte: ${error.issues.slice(0, 8).map(issue => `${issue.path.join('.')}: ${issue.code}`).join('; ')}. Respecta els tipus de l’esquema: els arrays han de ser llistes JSON, no text.`;
   }

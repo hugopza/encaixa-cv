@@ -1,7 +1,18 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { strictTool, validationFeedback } from '../src/lib/ai-contract';
-import { analysisSchema } from '../src/lib/domain';
+import { analysisSchema, rubricAnalysisSchema, AnalysisEvidenceError } from '../src/lib/domain';
+
+test('els IDs permesos al contracte enviat al model són els de la vacant', () => {
+  const schema = rubricAnalysisSchema([{ id: 'real-id', label: 'React', weight: 100 }]);
+  assert.match(JSON.stringify(strictTool(schema).input_schema), /real-id/);
+  assert.equal(schema.shape.criteria.element.shape.id.safeParse('inventat').success, false);
+  assert.equal(schema.shape.criteria.element.shape.id.safeParse('real-id').success, true);
+});
+
+test('el reintent identifica el camp de la cita rebutjada sense incloure el CV', () => {
+  assert.match(validationFeedback(new AnalysisEvidenceError('criteria[1].quote no existeix al CV.')), /criteria\[1\].quote/);
+});
 
 test('l’API rep arrays reals en mode estricte derivats del mateix esquema local', () => {
   const tool = strictTool(analysisSchema);

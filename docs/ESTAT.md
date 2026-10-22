@@ -23,6 +23,9 @@ Actualitzat: 22 d'octubre de 2026. Es diferencia codi implementat de flux verifi
 
 ## Verificacions executades
 
+- Diagnòstic del CV català indicat per l'usuari: extracció local correcta (una pàgina, 2.274 caràcters). Una crida real amb aquest PDF i els tres criteris 50/30/20 ha passat amb tres cites literals i IDs vàlids. El títol i la descripció utilitzats eren genèrics: no s'ha reproduït la petició exacta ni identificat encara la causa del cas fallit de producció.
+- Millora posterior: IDs restringits als de la vacant dins del contracte del model; reintent amb la resposta rebutjada i el camp concret incorrecte; error final d'evidència amb índex de criteri, sense exposar cites ni CV. Lint, typecheck, 33 tests i build aprovats. Aquest canvi encara no s'ha verificat a la URL desplegada.
+
 - `npm run typecheck`: aprovat després d'excloure `tmp/` i corregir l'alliberament del PDF amb `pdf.loadingTask.destroy()`.
 - `npm run lint`: aprovat després de substituir dos enllaços interns per `next/link`.
 - `npm test`: 31 proves aprovades de rúbrica, dashboard, entrevistes, fonts GitHub, contracte estricte i quota (denegació sense consumir la clau, alliberament de concurrència i Retry-After).
