@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import { ArrowDownWideNarrow, ArrowRight, BriefcaseBusiness, Check, ChevronRight, CircleHelp, FileText, GitCompareArrows, Layers3, LayoutDashboard, LoaderCircle, LogOut, Plus, Search, ShieldCheck, Sparkles, Upload, Users, X } from 'lucide-react';
 import type { Candidate, Criterion, Job } from '@/lib/domain';
 import Dialog from './dialog';
@@ -49,7 +50,7 @@ export default function Workspace({ initialJobs, initialCandidates, email, datab
   }
   function selectJob(id: string) { setActiveJob(id); setSelected([]); setSearch(''); setStage('all'); }
   return <div className="app-shell">
-    <aside className="sidebar"><a className="brand" href="/"><Layers3 size={27}/> encaja<span>●</span></a>
+    <aside className="sidebar"><Link className="brand" href="/"><Layers3 size={27}/> encaja<span>●</span></Link>
       <div className="workspace-label"><div className="workspace-avatar">E</div><div><strong>El teu espai</strong><small>Selecció de talent</small></div></div>
       <nav aria-label="Navegació principal"><button className={view === 'dashboard' ? 'nav-item active' : 'nav-item'} onClick={() => setView('dashboard')}><LayoutDashboard size={19}/> Visió general</button><button className={view === 'candidates' ? 'nav-item active' : 'nav-item'} onClick={() => setView('candidates')}><Users size={19}/> Candidatures<span className="nav-count">{candidates.length}</span></button></nav>
       <div className="sidebar-section"><span>Les teves vacants</span><button className="icon-button" onClick={() => setModal('job')} aria-label="Crear vacant"><Plus size={17}/></button></div>

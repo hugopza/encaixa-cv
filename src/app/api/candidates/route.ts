@@ -32,7 +32,7 @@ export async function POST(request: Request) {
             if (pdf.numPages > 15) throw new HttpError(400, 'El CV pot tenir com a màxim 15 pàgines.');
             const result = await extractText(pdf, { mergePages: true });
             text = result.text;
-          } finally { await pdf.destroy(); }
+          } finally { await pdf.loadingTask.destroy(); }
         } catch (e) {
           if (e instanceof HttpError) throw e;
           throw new HttpError(400, 'No es pot llegir aquest PDF. Enganxa el text del CV.');
