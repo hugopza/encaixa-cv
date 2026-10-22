@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const criterionSchema = z.object({ id: z.string().min(1).max(40), label: z.string().min(2).max(160), weight: z.number().int().min(1).max(100) });
-export const jobSchema = z.object({ title: z.string().trim().min(3).max(120), department: z.string().trim().max(80), location: z.string().trim().max(100), description: z.string().trim().min(40).max(12000), criteria: z.array(criterionSchema).min(2).max(8) }).superRefine((job, ctx) => {
+export const jobSchema = z.object({ title: z.string().trim().min(3).max(120), department: z.string().trim().max(80), location: z.string().trim().max(100), description: z.string().trim().min(40).max(12000), criteria: z.array(criterionSchema).min(1).max(8) }).superRefine((job, ctx) => {
   if (job.criteria.reduce((n, c) => n + c.weight, 0) !== 100) ctx.addIssue({ code: 'custom', message: 'Els pesos han de sumar 100.', path: ['criteria'] });
   if (new Set(job.criteria.map(c => c.id)).size !== job.criteria.length) ctx.addIssue({ code: 'custom', message: 'Els criteris han de ser únics.', path: ['criteria'] });
 });
@@ -10,7 +10,7 @@ export const analysisSchema = z.object({
   strengths: z.array(z.string().min(1).max(400)).max(5),
   gaps: z.array(z.string().min(1).max(400)).max(5),
   questions: z.array(z.string().min(1).max(400)).max(4),
-  criteria: z.array(z.object({ id: z.string(), score: z.number().int().min(0).max(5), rationale: z.string().min(10).max(800), quote: z.string().max(600) })).min(2).max(8),
+  criteria: z.array(z.object({ id: z.string(), score: z.number().int().min(0).max(5), rationale: z.string().min(10).max(800), quote: z.string().max(600) })).min(1).max(8),
 });
 export type Analysis = z.infer<typeof analysisSchema>;
 export type Criterion = z.infer<typeof criterionSchema>;

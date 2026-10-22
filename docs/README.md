@@ -10,5 +10,6 @@ Portal de selecció amb IA per a una prova tècnica de tres hores.
 | [DECISIONS.md](DECISIONS.md) | Decisions i fonts de reutilització |
 | [ESTAT.md](ESTAT.md) | Estat real, validació i següents passos |
 | [WALKTHROUGH.md](WALKTHROUGH.md) | Guió de demostració de 10–15 minuts |
+| [BONUS.md](BONUS.md) | Entrevistes, fonts professionals, migració i límits reals |
 
 Per continuar: llegir primer ESTAT, després CONFIGURACIO i ARQUITECTURA. Les regles compartides són a `../AGENTS.md`.

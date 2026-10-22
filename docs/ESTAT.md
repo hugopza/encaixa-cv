@@ -14,12 +14,16 @@ Actualitzat: 22 d'octubre de 2026. Es diferencia codi implementat de flux verifi
 - Dashboard, classificació, cerca, filtre, detall i comparació de fins a tres candidats.
 - Decisions de preselecció/descart exclusivament manuals.
 - Estils responsive i diàlegs natius amb focus i tancament per Escape.
+- Mostrar/ocultar contrasenya, vacant amb un sol criteri al 100%, visió general agregada i dashboard per vacant.
+- Eliminació de vacants amb confirmació, validació de propietari i cascada de candidatures.
+- Bonus d'entrevista i comprovació GitHub integrats de forma diferida a la fitxa. Detalls i límits a `BONUS.md`.
+- Cita d'exemple i requadre d'evidència retirats del login a petició de l'usuari.
 
 ## Verificacions executades
 
 - `npm run typecheck`: aprovat després d'excloure `tmp/` i corregir l'alliberament del PDF amb `pdf.loadingTask.destroy()`.
 - `npm run lint`: aprovat després de substituir dos enllaços interns per `next/link`.
-- `npm test`: 8 proves aprovades de puntuació ponderada, cites inventades/absents, normalització de text, IDs, escala i pesos.
+- `npm test`: 24 proves aprovades de rúbrica (incloent un criteri), dashboard agregat, cites d'entrevista, respostes incompletes, URLs segures, fonts GitHub i distinció entre absència i discrepància.
 - `npm run build`: aprovat amb Webpack i dos workers, inclosa la comprovació TypeScript del build.
 - Servidor local: va arrencar i `/login` va respondre HTTP 200.
 - Localhost tancat a petició de l'usuari; port 3000 comprovat sense listeners. No tornar-lo a aixecar sense petició.
@@ -36,6 +40,7 @@ Actualitzat: 22 d'octubre de 2026. Es diferencia codi implementat de flux verifi
 - L'agent no ha pogut escriure a `.git/index.lock` en els intents anteriors. L'autorització de l'usuari no canvia els permisos efectius del procés.
 - Projecte Supabase vinculat: `prova_tecnica`, ref `fgfwwjdneeiiadoictpv`.
 - Migració preparada: `supabase/migrations/20261022153000_create_recruiting_portal.sql`.
+- Nova migració dels bonus preparada: `supabase/migrations/20261022180000_candidate_bonuses.sql`; pendent d'aplicar.
 - CLI localitzada al cache de npx. La telemetria es desactiva amb `SUPABASE_TELEMETRY_DISABLED=1`; el token de login de l'usuari no és accessible al procés de l'agent.
 - L'usuari ha confirmat `npx supabase db push` completat; existència de les dues taules comprovada després.
 - L'usuari ha aportat la URL desplegada `https://prova-tenica-q6ki-3ylnsuzi7-hugos-projects-85a383b8.vercel.app/`. L'accés des de l'entorn de l'agent està bloquejat per xarxa (EACCES); no s'ha verificat la configuració de producció.
@@ -44,6 +49,7 @@ Actualitzat: 22 d'octubre de 2026. Es diferencia codi implementat de flux verifi
 
 1. Revisar/substituir `ANTHROPIC_API_KEY` a `.env.local`; l'API rebutja l'autenticació. No enviar la clau al xat.
 2. Permetre escriptura de l'agent a `.git` o crear els commits des de la terminal de l'usuari.
+3. Aplicar la nova migració dels bonus des de la terminal autenticada.
 
 ## Pendent de verificar
 
@@ -51,6 +57,7 @@ Actualitzat: 22 d'octubre de 2026. Es diferencia codi implementat de flux verifi
 - Aïllament RLS entre dos usuaris contra el projecte remot.
 - Inspecció visual desktop/mòbil en navegador; només hi ha revisió de codi fins ara.
 - Desplegament Vercel, comprovacions a la URL final i walkthrough.
+- Entrevista real amb Anthropic, consulta GitHub en viu i persistència/revisió dels bonus. Només s'han verificat contractes i lògica amb proves unitàries; no hi ha resultats simulats a la UI.
 
 ## Incidència de memòria
 

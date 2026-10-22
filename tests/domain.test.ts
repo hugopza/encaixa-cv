@@ -52,3 +52,17 @@ test('la vacant exigeix pesos que sumin 100 i IDs únics', () => {
   assert.equal(jobSchema.safeParse({ ...job, criteria: rubric.map(c => ({ ...c, weight: 10 })) }).success, false);
   assert.equal(jobSchema.safeParse({ ...job, criteria: rubric.map(c => ({ ...c, id: 'duplicate' })) }).success, false);
 });
+
+test('una vacant amb un únic criteri del 100% es pot crear i analitzar', () => {
+  const single = [{ ...rubric[0], weight: 100 }];
+  const job = { title: 'Frontend developer', department: '', location: '', description: 'Busquem experiència pràctica en React i TypeScript.', criteria: single };
+  assert.equal(jobSchema.safeParse(job).success, true);
+  const input = analysis(); input.criteria = [input.criteria[0]];
+  assert.equal(validateAnalysis(input, single, text).score, 80);
+});
+
+test('no permet una vacant sense criteris ni un únic criteri amb pes incomplet', () => {
+  const job = { title: 'Frontend developer', department: '', location: '', description: 'Busquem experiència pràctica en React i TypeScript.' };
+  assert.equal(jobSchema.safeParse({ ...job, criteria: [] }).success, false);
+  assert.equal(jobSchema.safeParse({ ...job, criteria: [{ ...rubric[0], weight: 50 }] }).success, false);
+});

@@ -11,13 +11,19 @@
 ## MVP
 
 - Email/contrasenya amb Supabase Auth, registre i tancament de sessió.
-- Vacants amb descripció i 2–6 criteris editables en crear-les; pesos sumen 100%.
+- Vacants amb descripció i 1–6 criteris editables en crear-les; un únic criteri pesa el 100%.
 - PDF amb text o TXT: màxim 2 MB, 15 pàgines, 45.000 caràcters. Alternativa: enganxar text.
 - Candidats persistits abans d'analitzar; detecció de duplicats per vacant.
 - IA: resum, puntuacions 0–5 per criteri, justificació, cites, punts forts, mancances i preguntes.
 - Total ponderat calculat al servidor. Sense decisió automàtica.
 - Classificació, cerca, filtre d'estat, detall i comparació de fins a tres candidats.
 - Mètriques calculades a partir de registres reals; errors i reintent visibles.
+- Visió general amb dades de totes les vacants i dashboard específic per vacant.
+- Mostrar/ocultar contrasenya i eliminar vacants amb confirmació i cascada de dades associades.
+
+## Bonus afegits
+
+Entrevistes assistides amb respostes i valoració justificada; consulta pública de GitHub després de confirmació humana. Abast implementat i dependències pendents a `BONUS.md`.
 
 ## Acceptació
 
