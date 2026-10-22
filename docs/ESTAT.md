@@ -4,6 +4,7 @@ Actualitzat: 22 d'octubre de 2026. Es diferencia codi implementat de flux verifi
 
 ## Implementat
 
+- Marca i metadades en català: Encaixa. Referències i noms de paquet actualitzats; verificació de cerca i consistència JSON del lockfile, sense canvis funcionals.
 - Login i registre amb Supabase; sessió comprovada a cada API.
 - Vacants amb rúbrica fixa; candidats PDF/TXT o text enganxat.
 - Esquema amb RLS i relació composta propietari/vacant.
@@ -25,6 +26,7 @@ Actualitzat: 22 d'octubre de 2026. Es diferencia codi implementat de flux verifi
 - Extracció local dels quatre CVs aportats: llegibles. Tres versions individuals acceptades; el PDF trilingüe supera 2 MB. No s'han copiat al repositori ni enviat a Anthropic.
 - Migració aplicada per l'usuari. Comprovació REST posterior de `jobs` i `candidates`: totes dues existeixen i retornen `42501` (accés anònim denegat), en lloc de PGRST205. Això comprova existència i restricció anònima, no l'aïllament entre dos usuaris autenticats.
 - Crida mínima a Anthropic: HTTP 401 d'autenticació. No hi ha encara anàlisi real completada.
+- Incidència de registre: `.env.local` contenia `/rest/v1/` al final de la URL de Supabase. S'ha corregit a la URL base; `/auth/v1/settings` respon HTTP 200, email activat i registre habilitat. La correcció de la variable a Vercel i el nou desplegament encara s'han de confirmar.
 
 ## Git i infraestructura
 
@@ -36,7 +38,7 @@ Actualitzat: 22 d'octubre de 2026. Es diferencia codi implementat de flux verifi
 - Migració preparada: `supabase/migrations/20261022153000_create_recruiting_portal.sql`.
 - CLI localitzada al cache de npx. La telemetria es desactiva amb `SUPABASE_TELEMETRY_DISABLED=1`; el token de login de l'usuari no és accessible al procés de l'agent.
 - L'usuari ha confirmat `npx supabase db push` completat; existència de les dues taules comprovada després.
-- Cap projecte Vercel de destí ni URL desplegada verificats.
+- L'usuari ha aportat la URL desplegada `https://prova-tenica-q6ki-3ylnsuzi7-hugos-projects-85a383b8.vercel.app/`. L'accés des de l'entorn de l'agent està bloquejat per xarxa (EACCES); no s'ha verificat la configuració de producció.
 
 ## Bloquejos que requereixen intervenció de l'usuari
 

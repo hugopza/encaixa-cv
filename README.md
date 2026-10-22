@@ -1,4 +1,4 @@
-# Encaja
+# Encaixa
 
 Portal de selecció amb IA: vacants, CVs PDF/TXT, avaluació amb evidències i comparació de candidats.
 

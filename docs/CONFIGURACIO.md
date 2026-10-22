@@ -10,6 +10,8 @@
 
 Variables: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`.
 
+`NEXT_PUBLIC_SUPABASE_URL` ha de ser la URL base del projecte (`https://PROJECT_REF.supabase.co`), sense `/rest/v1/` ni `/auth/v1/`. Afegir un d'aquests camins provoca `Invalid path specified in request URL` durant el registre/login. Després de corregir-la, reiniciar el servidor local o tornar a desplegar si la variable és a Vercel, perquè les variables `NEXT_PUBLIC_*` s'inclouen al bundle del navegador.
+
 No cal cap clau service-role. La clau d'Anthropic només s'utilitza al servidor.
 
 ## Supabase

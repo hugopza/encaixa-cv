@@ -1,4 +1,4 @@
--- Encaja. Run once in Supabase SQL editor. No service-role key is required.
+-- Encaixa. Run once in Supabase SQL editor. No service-role key is required.
 create table public.jobs (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade default auth.uid(),

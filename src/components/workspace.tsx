@@ -50,7 +50,7 @@ export default function Workspace({ initialJobs, initialCandidates, email, datab
   }
   function selectJob(id: string) { setActiveJob(id); setSelected([]); setSearch(''); setStage('all'); }
   return <div className="app-shell">
-    <aside className="sidebar"><Link className="brand" href="/"><Layers3 size={27}/> encaja<span>●</span></Link>
+    <aside className="sidebar"><Link className="brand" href="/"><Layers3 size={27}/> encaixa<span>●</span></Link>
       <div className="workspace-label"><div className="workspace-avatar">E</div><div><strong>El teu espai</strong><small>Selecció de talent</small></div></div>
       <nav aria-label="Navegació principal"><button className={view === 'dashboard' ? 'nav-item active' : 'nav-item'} onClick={() => setView('dashboard')}><LayoutDashboard size={19}/> Visió general</button><button className={view === 'candidates' ? 'nav-item active' : 'nav-item'} onClick={() => setView('candidates')}><Users size={19}/> Candidatures<span className="nav-count">{candidates.length}</span></button></nav>
       <div className="sidebar-section"><span>Les teves vacants</span><button className="icon-button" onClick={() => setModal('job')} aria-label="Crear vacant"><Plus size={17}/></button></div>
@@ -72,7 +72,7 @@ export default function Workspace({ initialJobs, initialCandidates, email, datab
           </section>
           {view === 'dashboard' && <div className="insights-row"><section className="distribution"><div><h3>Distribució de l’encaix</h3><span>{ready.length} anàlisis</span></div>{[{ label: 'Encaix alt', low: 75, high: 100, cls: 'high' }, { label: 'Encaix parcial', low: 40, high: 74, cls: 'medium' }, { label: 'Poca evidència', low: 0, high: 39, cls: 'low' }].map(b => { const n = ready.filter(c => c.score! >= b.low && c.score! <= b.high).length; return <div className="distribution-row" key={b.cls}><span>{b.label}<small>{b.low}–{b.high}</small></span><div className="distribution-track"><span className={b.cls} style={{ width: `${ready.length ? n / ready.length * 100 : 0}%` }}/></div><b>{n}</b></div>; })}</section><section className="decision-note"><ShieldCheck size={24}/><h3>Entén el perquè de cada puntuació.</h3><p>Cada criteri mostra una cita del CV i una justificació. La informació absent s’indica com a no acreditada.</p><button className="text-button" onClick={() => setModal('help')}>Com avaluem les candidatures<ArrowRight size={15}/></button></section></div>}
         </>}
-        <footer className="page-footer"><span>encaja · Selecció amb criteri</span><span>Les decisions de selecció són teves.</span></footer>
+        <footer className="page-footer"><span>encaixa · Selecció amb criteri</span><span>Les decisions de selecció són teves.</span></footer>
       </div>
     </main>
     {modal === 'job' && <JobForm onClose={() => setModal(null)} onCreated={j => { setJobs([j, ...jobs]); selectJob(j.id); setModal(null); }}/ >}

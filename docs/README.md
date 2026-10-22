@@ -1,4 +1,4 @@
-# Documentació d'Encaja
+# Documentació d'Encaixa
 
 Portal de selecció amb IA per a una prova tècnica de tres hores.
 
