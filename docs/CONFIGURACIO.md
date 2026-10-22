@@ -42,7 +42,15 @@ Auth: activar Email/password. Configurar Site URL i redireccions `/callback` per
 4. Provar login, càrrega PDF i anàlisi a la URL real.
 5. Comprovar que el pla suporta la durada configurada de 120 s per a anàlisi; ajustar reintents/durada si cal.
 
-## Verificació
+## Límits de consum d'IA
+
+Aplicar també `20261022190000_ai_rate_limits.sql` amb `npx supabase db push`. Els endpoints de pagament reserven quota a Postgres abans de cridar Anthropic: 10 operacions per hora i usuari, 30 per dia i usuari, 100 per dia per a tota l'app i una sola operació simultània per usuari. El dia es calcula en UTC. Les reserves es serialitzen dins de la BD; no depenen de la memòria de Vercel.
+
+Cada operació admet com a màxim dues crides al model (incloent una reparació de validació). Els intents fallits també compten. Llegir resultats ja desats i desar respostes d'entrevista no consumeix quota. Els límits són d'operacions, no una garantia d'import monetari; es recomana configurar també el pressupost del compte d'Anthropic.
+
+Sense quota es retorna 429 amb `Retry-After` i temps d'espera visible. Si falta la migració o la BD no pot validar el límit, es retorna 503 sense consumir la clau. El lease s'allibera tant en èxit com en error i expira al cap de tres minuts si el servidor s'interromp. Els comptadors no es poden modificar directament amb la clau pública.
+
+## Verificació del codi
 
 ```sh
 npm run lint

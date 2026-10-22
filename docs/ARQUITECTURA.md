@@ -41,4 +41,4 @@ Anàlisi: candidat desat → bloqueig temporal amb compare-and-set → Anthropic
 
 ## Límits coneguts
 
-No hi ha encara un limitador persistent de consum per usuari. Un usuari autenticat pot generar cost; abans d'un llançament públic ampli cal quota. No és un ATS de producció. Dades de demostració sintètiques.
+Quota persistent a Postgres: 10 operacions/hora i 30/dia per usuari, 100/dia globals i una operació simultània per usuari. Requereix aplicar la migració `20261022190000_ai_rate_limits.sql`; si no es pot validar la quota, no es crida Anthropic. No és un ATS de producció.

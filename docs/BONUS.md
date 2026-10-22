@@ -16,7 +16,7 @@ Fitxa del candidat → Entrevista assistida amb IA.
 - Una valoració no és verificació independent dels fets declarats ni decideix la contractació.
 - Errors visibles, reintent, càrrega i recuperació d'operacions interrompudes després de tres minuts.
 
-Depèn de la mateixa clau Anthropic del flux principal. L'última comprovació real retorna HTTP 401; no s'ha validat una entrevista real contra el proveïdor. No es genera cap resultat de substitució.
+Depèn de la mateixa clau Anthropic del flux principal. La nova clau ja és acceptada i s'ha completat una anàlisi real de CV sintètic, però encara no s'ha validat una entrevista real contra el proveïdor. No es genera cap resultat de substitució.
 
 ## Comprovació professional automatitzada
 
